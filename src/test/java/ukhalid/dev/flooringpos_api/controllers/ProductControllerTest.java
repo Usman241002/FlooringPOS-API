@@ -23,10 +23,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(ProductController.class)
 class ProductControllerTest {
+    private final ObjectMapper objectMapper = new ObjectMapper();
     @Autowired
     private MockMvc mockMvc;
-    @Autowired
-    private ObjectMapper objectMapper;
     @MockitoBean
     private ProductService productService;
 
@@ -58,7 +57,7 @@ class ProductControllerTest {
     void shouldUpdateProduct() throws Exception {
         Product product = createProduct("Walnut Flooring", "45.00", 50);
         when(productService.updateProduct(eq(1), any(Product.class))).thenReturn(product);
-        mockMvc.perform(put("/products/1").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(product))).andExpect(status().isOk()).andExpect(jsonPath("$.name").value("Walnut Flooring")).andExpect(jsonPath("$.price").value(45.00)).andExpect(jsonPath("$.stockQuantity").value(50));
+        mockMvc.perform(put("/products/1").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(product))).andExpect(status().isCreated()).andExpect(jsonPath("$.name").value("Walnut Flooring")).andExpect(jsonPath("$.price").value(45.00)).andExpect(jsonPath("$.stockQuantity").value(50));
         verify(productService).updateProduct(eq(1), any(Product.class));
     }
 
