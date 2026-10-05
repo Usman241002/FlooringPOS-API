@@ -34,8 +34,8 @@ public class ProductService {
             Product productToUpdate = productToUpdateOptional.get();
 
             productToUpdate.setName(product.getName());
-            productToUpdate.setPrice(product.getPrice());
-            productToUpdate.setStockQuantity(product.getStockQuantity());
+            productToUpdate.setPricePerM2(product.getPricePerM2());
+            productToUpdate.setStockQuantityUnits(product.getStockQuantityUnits());
             return this.productRepository.save(productToUpdate);
         }
         throw new IllegalArgumentException("Product not found");

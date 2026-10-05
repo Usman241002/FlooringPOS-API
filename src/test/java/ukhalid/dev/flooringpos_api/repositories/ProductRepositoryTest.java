@@ -21,13 +21,13 @@ class ProductRepositoryTest {
     void shouldFindAllProducts() {
         Product product1 = new Product();
         product1.setName("Oak Flooring");
-        product1.setPrice(new BigDecimal("32.50"));
-        product1.setStockQuantity(100);
+        product1.setPricePerM2(new BigDecimal("32.50"));
+        product1.setStockQuantityUnits(BigDecimal.valueOf(100));
 
         Product product2 = new Product();
         product2.setName("Walnut Flooring");
-        product2.setPrice(new BigDecimal("45.00"));
-        product2.setStockQuantity(50);
+        product2.setPricePerM2(new BigDecimal("45.00"));
+        product2.setStockQuantityUnits(BigDecimal.valueOf(50.00));
 
         productRepository.save(product1);
         productRepository.save(product2);
@@ -41,8 +41,8 @@ class ProductRepositoryTest {
     void shouldFindProductById() {
         Product product = new Product();
         product.setName("Oak Flooring");
-        product.setPrice(new BigDecimal("32.50"));
-        product.setStockQuantity(100);
+        product.setPricePerM2(new BigDecimal("32.50"));
+        product.setStockQuantityUnits(BigDecimal.valueOf(100));
 
         Product savedProduct = productRepository.save(product);
 
@@ -52,28 +52,28 @@ class ProductRepositoryTest {
         assertTrue(foundProduct.isPresent());
         assertEquals("Oak Flooring", foundProduct.get().getName());
     }
-    
+
     @Test
     void shouldSaveProduct() {
         Product product = new Product();
         product.setName("Oak Flooring");
-        product.setPrice(new BigDecimal("32.50"));
-        product.setStockQuantity(100);
+        product.setPricePerM2(new BigDecimal("32.50"));
+        product.setStockQuantityUnits(BigDecimal.valueOf(100));
 
         Product savedProduct = productRepository.save(product);
 
         assertNotNull(savedProduct.getId());
         assertEquals("Oak Flooring", savedProduct.getName());
-        assertEquals(new BigDecimal("32.50"), savedProduct.getPrice());
-        assertEquals(100, savedProduct.getStockQuantity());
+        assertEquals(new BigDecimal("32.50"), savedProduct.getPricePerM2());
+        assertEquals(100, savedProduct.getStockQuantityUnits());
     }
 
     @Test
     void shouldDeleteProduct() {
         Product product = new Product();
         product.setName("Oak Flooring");
-        product.setPrice(new BigDecimal("32.50"));
-        product.setStockQuantity(100);
+        product.setPricePerM2(new BigDecimal("32.50"));
+        product.setStockQuantityUnits(BigDecimal.valueOf(100));
 
         Product savedProduct = productRepository.save(product);
 

@@ -18,16 +18,19 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public Order getOrderById(Long id) {
+    public Order getOrderById(Integer id) {
         return orderRepository.findById(id).orElse(null);
     }
 
     public Order createOrder(Order order) {
+        return null;
     }
 
     public Order updateOrder(Integer id, Order order) {
+        return null;
     }
 
     public void deleteOrder(Integer id) {
+        
     }
 }

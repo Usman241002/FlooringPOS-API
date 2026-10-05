@@ -26,8 +26,8 @@ class ProductServiceTest {
 
     @Test
     void shouldGetAllProducts() {
-        Product product1 = createProduct("Oak Flooring", "32.50", 100);
-        Product product2 = createProduct("Walnut Flooring", "45.00", 50);
+        Product product1 = createProduct("Oak Flooring", "32.50", "20", "2.40");
+        Product product2 = createProduct("Walnut Flooring", "45.00", "10", "2.40");
 
         when(productRepository.findAll())
                 .thenReturn(List.of(product1, product2));
@@ -43,7 +43,7 @@ class ProductServiceTest {
 
     @Test
     void shouldGetProductById() {
-        Product product = createProduct("Oak Flooring", "32.50", 100);
+        Product product = createProduct("Oak Flooring", "32.50", "20", "2.40");
 
         when(productRepository.findById(1))
                 .thenReturn(Optional.of(product));
@@ -52,8 +52,9 @@ class ProductServiceTest {
 
         assertNotNull(result);
         assertEquals("Oak Flooring", result.getName());
-        assertEquals(new BigDecimal("32.50"), result.getPrice());
-        assertEquals(100, result.getStockQuantity());
+        assertEquals(new BigDecimal("32.50"), result.getPricePerM2());
+        assertEquals(new BigDecimal("20"), result.getStockQuantityUnits());
+        assertEquals(new BigDecimal("2.40"), result.getM2PerUnit());
 
         verify(productRepository).findById(1);
     }
@@ -72,7 +73,7 @@ class ProductServiceTest {
 
     @Test
     void shouldCreateProduct() {
-        Product product = createProduct("Oak Flooring", "32.50", 100);
+        Product product = createProduct("Oak Flooring", "32.50", "20", "2.40");
 
         when(productRepository.save(product))
                 .thenReturn(product);
@@ -86,8 +87,11 @@ class ProductServiceTest {
 
     @Test
     void shouldUpdateProduct() {
-        Product existingProduct = createProduct("Oak Flooring", "32.50", 100);
-        Product updatedProduct = createProduct("Walnut Flooring", "45.00", 50);
+        Product existingProduct =
+                createProduct("Oak Flooring", "32.50", "20", "2.40");
+
+        Product updatedProduct =
+                createProduct("Walnut Flooring", "45.00", "10", "2.40");
 
         when(productRepository.findById(1))
                 .thenReturn(Optional.of(existingProduct));
@@ -98,8 +102,9 @@ class ProductServiceTest {
         Product result = productService.updateProduct(1, updatedProduct);
 
         assertEquals("Walnut Flooring", result.getName());
-        assertEquals(new BigDecimal("45.00"), result.getPrice());
-        assertEquals(50, result.getStockQuantity());
+        assertEquals(new BigDecimal("45.00"), result.getPricePerM2());
+        assertEquals(new BigDecimal("10"), result.getStockQuantityUnits());
+        assertEquals(new BigDecimal("2.40"), result.getM2PerUnit());
 
         verify(productRepository).findById(1);
         verify(productRepository).save(existingProduct);
@@ -107,7 +112,8 @@ class ProductServiceTest {
 
     @Test
     void shouldThrowExceptionWhenUpdatingNonExistentProduct() {
-        Product product = createProduct("Oak Flooring", "32.50", 100);
+        Product product =
+                createProduct("Oak Flooring", "32.50", "20", "2.40");
 
         when(productRepository.findById(1))
                 .thenReturn(Optional.empty());
@@ -123,7 +129,8 @@ class ProductServiceTest {
 
     @Test
     void shouldDeleteProduct() {
-        Product product = createProduct("Oak Flooring", "32.50", 100);
+        Product product =
+                createProduct("Oak Flooring", "32.50", "20", "2.40");
 
         when(productRepository.findById(1))
                 .thenReturn(Optional.of(product));
@@ -150,11 +157,19 @@ class ProductServiceTest {
         verify(productRepository, never()).delete(any());
     }
 
-    private Product createProduct(String name, String price, int stockQuantity) {
+    private Product createProduct(
+            String name,
+            String pricePerM2,
+            String stockQuantityUnits,
+            String m2PerUnit
+    ) {
         Product product = new Product();
+
         product.setName(name);
-        product.setPrice(new BigDecimal(price));
-        product.setStockQuantity(stockQuantity);
+        product.setPricePerM2(new BigDecimal(pricePerM2));
+        product.setStockQuantityUnits(new BigDecimal(stockQuantityUnits));
+        product.setM2PerUnit(new BigDecimal(m2PerUnit));
+
         return product;
     }
 }
