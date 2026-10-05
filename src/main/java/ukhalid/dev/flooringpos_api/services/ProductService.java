@@ -22,25 +22,7 @@ public class ProductService {
     public Product getProductById(Integer id) {
         return this.productRepository.findById(id).orElse(null);
     }
-
-    public Product createProduct(Product product) {
-        return this.productRepository.save(product);
-    }
-
-    public Product updateProduct(Integer id, Product product) {
-        Optional<Product> productToUpdateOptional = this.productRepository.findById(id);
-
-        if (productToUpdateOptional.isPresent()) {
-            Product productToUpdate = productToUpdateOptional.get();
-
-            productToUpdate.setName(product.getName());
-            productToUpdate.setPricePerM2(product.getPricePerM2());
-            productToUpdate.setStockQuantityUnits(product.getStockQuantityUnits());
-            return this.productRepository.save(productToUpdate);
-        }
-        throw new IllegalArgumentException("Product not found");
-    }
-
+    
     public Product deleteProduct(Integer id) {
         Optional<Product> existingProduct = this.productRepository.findById(id);
         if (existingProduct.isPresent()) {

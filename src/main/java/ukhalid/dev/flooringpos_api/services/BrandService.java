@@ -21,21 +21,7 @@ public class BrandService {
     public Brand getBrandById(Integer id) {
         return brandRepository.findById(id).orElse(null);
     }
-
-    public Brand createBrand(Brand brand) {
-        return brandRepository.save(brand);
-    }
-
-    public Brand updateBrand(Integer id, Brand brand) {
-        Optional<Brand> brandToUpdateOptional = brandRepository.findById(id);
-        if (brandToUpdateOptional.isPresent()) {
-            Brand brandToUpdate = brandToUpdateOptional.get();
-            brandToUpdate.setName(brand.getName());
-            return brandRepository.save(brandToUpdate);
-        }
-        throw new IllegalArgumentException("Product not found");
-    }
-
+    
     public Brand deleteBrand(Integer id) {
         Optional<Brand> brandToDeleteOptiional = brandRepository.findById(id);
         if (brandToDeleteOptiional.isPresent()) {

@@ -8,29 +8,22 @@ import java.math.BigDecimal;
 @Table(name = "products")
 public class Product {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
-
     @Column(nullable = false)
     private String name;
-
     @Column(nullable = false)
-    private BigDecimal pricePerM2;
-
-    @Column(nullable = false)
-    private BigDecimal stockQuantityUnits;
-
-    @Column(nullable = false)
-    private BigDecimal m2PerUnit;
+    private BigDecimal sellingPriceM2;
+    @Column
+    private BigDecimal costPriceM2;
 
     public Product() {
     }
@@ -67,28 +60,20 @@ public class Product {
         this.name = name;
     }
 
-    public BigDecimal getPricePerM2() {
-        return pricePerM2;
+    public BigDecimal getSellingPriceM2() {
+        return sellingPriceM2;
     }
 
-    public void setPricePerM2(BigDecimal pricePerM2) {
-        this.pricePerM2 = pricePerM2;
+    public void setSellingPriceM2(BigDecimal sellingPriceM2) {
+        this.sellingPriceM2 = sellingPriceM2;
     }
 
-    public BigDecimal getStockQuantityUnits() {
-        return stockQuantityUnits;
+    public BigDecimal getCostPriceM2() {
+        return costPriceM2;
     }
 
-    public void setStockQuantityUnits(BigDecimal stockQuantityUnits) {
-        this.stockQuantityUnits = stockQuantityUnits;
-    }
-
-    public BigDecimal getM2PerUnit() {
-        return m2PerUnit;
-    }
-
-    public void setM2PerUnit(BigDecimal m2PerUnit) {
-        this.m2PerUnit = m2PerUnit;
+    public void setCostPriceM2(BigDecimal costPriceM2) {
+        this.costPriceM2 = costPriceM2;
     }
 }
 

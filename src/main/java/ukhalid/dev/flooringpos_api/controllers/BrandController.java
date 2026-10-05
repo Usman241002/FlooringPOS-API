@@ -22,20 +22,9 @@ public class BrandController {
     public Brand getBrandById(@PathVariable Integer id) {
         return brandService.getBrandById(id);
     }
-
-    @PostMapping
-    public Brand createBrand(@RequestBody Brand brand) {
-        return brandService.createBrand(brand);
-    }
-
-    @PutMapping("/{id}")
-    public Brand updateBrand(@PathVariable Integer id, @RequestBody Brand brand) {
-        return brandService.updateBrand(id, brand);
-    }
-
+    
     @DeleteMapping("/{id}")
     public Brand deleteBrand(@PathVariable Integer id) {
         return brandService.deleteBrand(id);
     }
-
 }
