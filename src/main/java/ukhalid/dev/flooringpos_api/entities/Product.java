@@ -24,6 +24,10 @@ public class Product {
     private BigDecimal sellingPriceM2;
     @Column
     private BigDecimal costPriceM2;
+    @Column
+    private BigDecimal fittingPriceM2;
+    @Column
+    private BigDecimal minumumFittingCharge;
 
     public Product() {
     }
@@ -74,6 +78,22 @@ public class Product {
 
     public void setCostPriceM2(BigDecimal costPriceM2) {
         this.costPriceM2 = costPriceM2;
+    }
+
+    public BigDecimal getFittingPriceM2() {
+        return fittingPriceM2;
+    }
+
+    public void setFittingPriceM2(BigDecimal fittingPriceM2) {
+        this.fittingPriceM2 = fittingPriceM2;
+    }
+
+    public BigDecimal getMinumumFittingCharge() {
+        return minumumFittingCharge;
+    }
+
+    public void setMinumumFittingCharge(BigDecimal minumumFittingCharge) {
+        this.minumumFittingCharge = minumumFittingCharge;
     }
 }
 
