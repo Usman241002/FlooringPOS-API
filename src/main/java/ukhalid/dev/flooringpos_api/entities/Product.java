@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 @Table(name = "products")
 public class Product {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -18,16 +17,15 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
+    @ManyToOne
+    @JoinColumn(name = "fitting_rule_id")
+    private FittingRule fittingRule;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
     private BigDecimal sellingPriceM2;
     @Column
     private BigDecimal costPriceM2;
-    @Column
-    private BigDecimal fittingPriceM2;
-    @Column
-    private BigDecimal minumumFittingCharge;
 
     public Product() {
     }
@@ -78,22 +76,6 @@ public class Product {
 
     public void setCostPriceM2(BigDecimal costPriceM2) {
         this.costPriceM2 = costPriceM2;
-    }
-
-    public BigDecimal getFittingPriceM2() {
-        return fittingPriceM2;
-    }
-
-    public void setFittingPriceM2(BigDecimal fittingPriceM2) {
-        this.fittingPriceM2 = fittingPriceM2;
-    }
-
-    public BigDecimal getMinumumFittingCharge() {
-        return minumumFittingCharge;
-    }
-
-    public void setMinumumFittingCharge(BigDecimal minumumFittingCharge) {
-        this.minumumFittingCharge = minumumFittingCharge;
     }
 }
 
