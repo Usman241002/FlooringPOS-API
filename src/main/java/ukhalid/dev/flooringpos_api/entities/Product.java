@@ -26,6 +26,8 @@ public class Product {
     private BigDecimal sellingPriceM2;
     @Column
     private BigDecimal costPriceM2;
+    @Column
+    private Boolean isActive;
 
     public Product() {
     }
@@ -76,6 +78,14 @@ public class Product {
 
     public void setCostPriceM2(BigDecimal costPriceM2) {
         this.costPriceM2 = costPriceM2;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 }
 

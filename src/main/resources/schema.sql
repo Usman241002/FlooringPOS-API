@@ -54,6 +54,7 @@ CREATE TABLE products
     name             VARCHAR(255)   NOT NULL,
     cost_price_m2    DECIMAL(12, 2),
     selling_price_m2 DECIMAL(12, 2) NOT NULL,
+    is_active        BOOLEAN        NOT NULL DEFAULT TRUE,
 
     CONSTRAINT fk_products_category
         FOREIGN KEY (category_id)
