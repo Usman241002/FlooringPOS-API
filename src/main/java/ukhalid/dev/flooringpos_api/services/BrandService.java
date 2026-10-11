@@ -21,14 +21,14 @@ public class BrandService {
     public Brand getBrandById(Integer id) {
         return brandRepository.findById(id).orElse(null);
     }
-    
+
     public Brand deleteBrand(Integer id) {
-        Optional<Brand> brandToDeleteOptiional = brandRepository.findById(id);
-        if (brandToDeleteOptiional.isPresent()) {
-            Brand brandToDelete = brandToDeleteOptiional.get();
+        Optional<Brand> brandToDeleteOptional = brandRepository.findById(id);
+        if (brandToDeleteOptional.isPresent()) {
+            Brand brandToDelete = brandToDeleteOptional.get();
             brandRepository.deleteById(id);
             return brandToDelete;
         }
-        throw new IllegalArgumentException("Product not found");
+        throw new IllegalArgumentException("Brand not found");
     }
 }
