@@ -2,7 +2,7 @@ package ukhalid.dev.flooringpos_api.dtos;
 
 import java.math.BigDecimal;
 
-public class CreateProductDTO {
+public class ProductDTO {
 
     private Integer brand;
     private Integer category;
@@ -11,7 +11,7 @@ public class CreateProductDTO {
     private BigDecimal costPriceM2;
     private Boolean isActive;
 
-    public CreateProductDTO() {
+    public ProductDTO() {
     }
 
     public BigDecimal getCostPriceM2() {

@@ -1,7 +1,7 @@
 package ukhalid.dev.flooringpos_api.services;
 
 import org.springframework.stereotype.Service;
-import ukhalid.dev.flooringpos_api.dtos.CreateProductDTO;
+import ukhalid.dev.flooringpos_api.dtos.ProductDTO;
 import ukhalid.dev.flooringpos_api.entities.Brand;
 import ukhalid.dev.flooringpos_api.entities.Category;
 import ukhalid.dev.flooringpos_api.entities.Product;
@@ -32,7 +32,7 @@ public class ProductService {
         return this.productRepository.findById(id).orElse(null);
     }
 
-    public Product createProduct(CreateProductDTO product) {
+    public Product createProduct(ProductDTO product) {
         Product productToSave = new Product();
 
         Optional<Brand> brandOptional =
@@ -59,6 +59,41 @@ public class ProductService {
         return productRepository.save(productToSave);
     }
 
+    public Product updateProduct(Integer id, ProductDTO product) {
+        Optional<Product> productToUpdateOptional = this.productRepository.findById(id);
+
+        Optional<Brand> brandOptional =
+                brandRepository.findById(product.getBrand());
+
+        Optional<Category> categoryOptional =
+                categoryRepository.findById(product.getCategory());
+
+        if (brandOptional.isEmpty()) {
+            throw new RuntimeException("Brand not found");
+        }
+
+        if (categoryOptional.isEmpty()) {
+            throw new RuntimeException("Category not found");
+        }
+
+        if (productToUpdateOptional.isEmpty()) {
+            throw new IllegalArgumentException("Product not found");
+        }
+
+        Product productToUpdate = productToUpdateOptional.get();
+        Brand brand = brandOptional.get();
+        Category category = categoryOptional.get();
+
+        productToUpdate.setBrand(brand);
+        productToUpdate.setCategory(category);
+        productToUpdate.setName(product.getName());
+        productToUpdate.setSellingPriceM2(product.getSellingPriceM2());
+        productToUpdate.setCostPriceM2(product.getCostPriceM2());
+        productToUpdate.setIsActive(product.getIsActive());
+
+        return productRepository.save(productToUpdate);
+    }
+
     public Product deleteProduct(Integer id) {
         Optional<Product> existingProduct = this.productRepository.findById(id);
         if (existingProduct.isPresent()) {
@@ -68,5 +103,6 @@ public class ProductService {
         }
         throw new IllegalArgumentException("Product not found");
     }
-    
+
+
 }
