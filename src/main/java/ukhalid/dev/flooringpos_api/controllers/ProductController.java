@@ -1,6 +1,7 @@
 package ukhalid.dev.flooringpos_api.controllers;
 
 import org.springframework.web.bind.annotation.*;
+import ukhalid.dev.flooringpos_api.dtos.CreateProductDTO;
 import ukhalid.dev.flooringpos_api.entities.Product;
 import ukhalid.dev.flooringpos_api.services.ProductService;
 
@@ -24,7 +25,12 @@ public class ProductController {
     public Product getProductById(@PathVariable Integer id) {
         return productService.getProductById(id);
     }
-    
+
+    @PostMapping()
+    public Product createProduct(@RequestBody CreateProductDTO product) {
+        return productService.createProduct(product);
+    }
+
     @DeleteMapping("/{id}")
     public Product deleteProduct(@PathVariable Integer id) {
         return productService.deleteProduct(id);
