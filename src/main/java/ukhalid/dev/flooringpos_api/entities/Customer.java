@@ -2,6 +2,8 @@ package ukhalid.dev.flooringpos_api.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "customers")
 public class Customer {
@@ -17,6 +19,9 @@ public class Customer {
 
     @Column
     private String phone;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Address> addresses;
 
     public Integer getId() {
         return id;
@@ -48,5 +53,13 @@ public class Customer {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
 }
