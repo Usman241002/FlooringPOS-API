@@ -1,0 +1,60 @@
+package ukhalid.dev.flooringpos_api.services;
+
+import org.springframework.stereotype.Service;
+import ukhalid.dev.flooringpos_api.dtos.CreateAddressDTO;
+import ukhalid.dev.flooringpos_api.entities.Address;
+import ukhalid.dev.flooringpos_api.entities.Customer;
+import ukhalid.dev.flooringpos_api.repositories.AddressRepository;
+import ukhalid.dev.flooringpos_api.repositories.CustomerRepository;
+
+import java.util.Optional;
+
+@Service
+public class AddressService {
+    private final AddressRepository addressRepository;
+    private final CustomerRepository customerRepository;
+
+    public AddressService(AddressRepository addressRepository, CustomerRepository customerRepository) {
+        this.addressRepository = addressRepository;
+        this.customerRepository = customerRepository;
+    }
+
+    public Address createAddress(CreateAddressDTO address) {
+        Address newAddress = new Address();
+        Optional<Customer> customerOptional = customerRepository.findById(address.getCustomerId());
+        if (customerOptional.isPresent()) {
+            newAddress.setAddressLine1(address.getAddressLine1());
+            newAddress.setAddressLine2(address.getAddressLine2());
+            newAddress.setPostcode(address.getPostcode());
+            newAddress.setCustomer(customerOptional.get());
+            return addressRepository.save(newAddress);
+        }
+        throw new IllegalArgumentException("Customer not found");
+    }
+
+    public Address updateAddress(Integer addressId, Address address) {
+        Optional<Address> addressOptional = addressRepository.findById(addressId);
+
+        if (addressOptional.isPresent()) {
+            Address existingAddress = addressOptional.get();
+
+            existingAddress.setAddressLine1(address.getAddressLine1());
+            existingAddress.setAddressLine2(address.getAddressLine2());
+            existingAddress.setPostcode(address.getPostcode());
+
+            return addressRepository.save(existingAddress);
+        }
+
+        throw new IllegalArgumentException("Address not found");
+    }
+
+    public Address deleteAddress(Integer id) {
+        Optional<Address> addressToDeleteOptional = addressRepository.findById(id);
+        if (addressToDeleteOptional.isPresent()) {
+            Address addressToDelete = addressToDeleteOptional.get();
+            addressRepository.deleteById(id);
+            return addressToDelete;
+        }
+        throw new IllegalArgumentException("Address not found");
+    }
+}
