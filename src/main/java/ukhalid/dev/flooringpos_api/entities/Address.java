@@ -3,6 +3,8 @@ package ukhalid.dev.flooringpos_api.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "addresses")
 public class Address {
@@ -19,6 +21,9 @@ public class Address {
     private String addressLine2;
     @Column(nullable = false)
     private String postcode;
+    @OneToMany(mappedBy = "address")
+    private List<Room> rooms;
+
 
     public Integer getId() {
         return id;
@@ -55,8 +60,16 @@ public class Address {
     public Customer getCustomer() {
         return customer;
     }
-
+    
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
     }
 }

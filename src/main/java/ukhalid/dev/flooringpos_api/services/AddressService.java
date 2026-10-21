@@ -19,6 +19,14 @@ public class AddressService {
         this.customerRepository = customerRepository;
     }
 
+    public Address getAddressById(int id) {
+        Optional<Address> addressOptional = addressRepository.findById(id);
+        if (addressOptional.isPresent()) {
+            return addressOptional.get();
+        }
+        throw new IllegalArgumentException("Address not found");
+    }
+
     public Address createAddress(CreateAddressDTO address) {
         Address newAddress = new Address();
         Optional<Customer> customerOptional = customerRepository.findById(address.getCustomerId());
@@ -57,4 +65,6 @@ public class AddressService {
         }
         throw new IllegalArgumentException("Address not found");
     }
+
+
 }

@@ -14,6 +14,11 @@ public class AddressController {
         this.addressService = addressService;
     }
 
+    @GetMapping("/{id}")
+    public Address getAddressById(@PathVariable int id) {
+        return addressService.getAddressById(id);
+    }
+
     @PostMapping
     public Address createAddress(@RequestBody CreateAddressDTO address) {
         return addressService.createAddress(address);
