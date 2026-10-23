@@ -24,7 +24,6 @@ public class Address {
     @OneToMany(mappedBy = "address")
     private List<Room> rooms;
 
-
     public Integer getId() {
         return id;
     }
@@ -60,7 +59,7 @@ public class Address {
     public Customer getCustomer() {
         return customer;
     }
-    
+
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }

@@ -53,16 +53,13 @@ public class RoomService {
         return roomRepository.save(roomToUpdate);
     }
 
-    public Room deleteRoom(Integer id) {
+    public void deleteRoom(Integer id) {
         Optional<Room> roomToDeleteOptional = roomRepository.findById(id);
 
         if (roomToDeleteOptional.isEmpty()) {
             throw new IllegalArgumentException("Room not found");
         }
         Room roomToDelete = roomToDeleteOptional.get();
-
         roomRepository.delete(roomToDelete);
-
-        return roomToDelete;
     }
 }

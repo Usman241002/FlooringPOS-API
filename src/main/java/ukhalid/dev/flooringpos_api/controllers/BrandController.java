@@ -22,9 +22,9 @@ public class BrandController {
     public Brand getBrandById(@PathVariable Integer id) {
         return brandService.getBrandById(id);
     }
-    
+
     @DeleteMapping("/{id}")
-    public Brand deleteBrand(@PathVariable Integer id) {
-        return brandService.deleteBrand(id);
+    public void deleteBrand(@PathVariable Integer id) {
+        brandService.deleteBrand(id);
     }
 }

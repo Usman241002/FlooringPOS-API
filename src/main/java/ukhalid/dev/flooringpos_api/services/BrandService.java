@@ -22,12 +22,11 @@ public class BrandService {
         return brandRepository.findById(id).orElse(null);
     }
 
-    public Brand deleteBrand(Integer id) {
+    public void deleteBrand(Integer id) {
         Optional<Brand> brandToDeleteOptional = brandRepository.findById(id);
         if (brandToDeleteOptional.isPresent()) {
             Brand brandToDelete = brandToDeleteOptional.get();
             brandRepository.deleteById(id);
-            return brandToDelete;
         }
         throw new IllegalArgumentException("Brand not found");
     }

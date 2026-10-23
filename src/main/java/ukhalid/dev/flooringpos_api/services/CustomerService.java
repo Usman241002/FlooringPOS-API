@@ -23,14 +23,13 @@ public class CustomerService {
         return customerRepository.findById(id).orElse(null);
     }
 
-    public Customer deleteCustomerById(Integer id) {
+    public void deleteCustomerById(Integer id) {
         Optional<Customer> customerToDeleteOptional = customerRepository.findById(id);
         if (customerToDeleteOptional.isPresent()) {
             Customer customerToDelete = customerToDeleteOptional.get();
             customerRepository.delete(customerToDelete);
-            return customerToDelete;
         }
-        throw new IllegalArgumentException("Product not found");
+        throw new IllegalArgumentException("Customer not found");
     }
 
     public Customer createCustomer(CustomerDTO customer) {

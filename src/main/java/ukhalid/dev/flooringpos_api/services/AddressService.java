@@ -56,12 +56,11 @@ public class AddressService {
         throw new IllegalArgumentException("Address not found");
     }
 
-    public Address deleteAddress(Integer id) {
+    public void deleteAddress(Integer id) {
         Optional<Address> addressToDeleteOptional = addressRepository.findById(id);
         if (addressToDeleteOptional.isPresent()) {
             Address addressToDelete = addressToDeleteOptional.get();
             addressRepository.deleteById(id);
-            return addressToDelete;
         }
         throw new IllegalArgumentException("Address not found");
     }
