@@ -168,14 +168,9 @@ class ProductControllerTest {
     // DELETE /products/{id}
 
     @Test
-    void deleteProduct_shouldReturnDeletedProduct() throws Exception {
-        when(productService.deleteProduct(1))
-                .thenReturn(product);
-
+    void deleteProduct_shouldDeleteProduct() throws Exception {
         mockMvc.perform(delete("/products/1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name")
-                        .value("Test Product"));
+                .andExpect(status().isOk());
 
         verify(productService).deleteProduct(1);
     }

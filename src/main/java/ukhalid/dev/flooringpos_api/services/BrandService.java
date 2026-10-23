@@ -24,10 +24,9 @@ public class BrandService {
 
     public void deleteBrand(Integer id) {
         Optional<Brand> brandToDeleteOptional = brandRepository.findById(id);
-        if (brandToDeleteOptional.isPresent()) {
-            Brand brandToDelete = brandToDeleteOptional.get();
-            brandRepository.deleteById(id);
+        if (brandToDeleteOptional.isEmpty()) {
+            throw new IllegalArgumentException("Brand not found");
         }
-        throw new IllegalArgumentException("Brand not found");
+        brandRepository.deleteById(id);
     }
 }

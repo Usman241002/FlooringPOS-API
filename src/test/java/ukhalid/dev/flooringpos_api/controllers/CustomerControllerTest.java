@@ -153,16 +153,9 @@ class CustomerControllerTest {
     // DELETE /customers/{id}
 
     @Test
-    void deleteCustomerById_shouldReturnDeletedCustomer() throws Exception {
-        when(customerService.deleteCustomerById(1))
-                .thenReturn(customer);
-
+    void deleteCustomerById_shouldDeleteCustomer() throws Exception {
         mockMvc.perform(delete("/customers/1"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.firstName").value("John"))
-                .andExpect(jsonPath("$.lastName").value("Smith"));
+                .andExpect(status().isOk());
 
         verify(customerService).deleteCustomerById(1);
     }

@@ -96,11 +96,11 @@ public class ProductService {
 
     public void deleteProduct(Integer id) {
         Optional<Product> existingProduct = this.productRepository.findById(id);
-        if (existingProduct.isPresent()) {
-            Product product = existingProduct.get();
-            this.productRepository.delete(product);
+        if (existingProduct.isEmpty()) {
+            throw new IllegalArgumentException("Product not found");
         }
-        throw new IllegalArgumentException("Product not found");
+        Product product = existingProduct.get();
+        this.productRepository.delete(product);
     }
 
 

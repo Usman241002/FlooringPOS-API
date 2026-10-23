@@ -126,12 +126,10 @@ class CustomerServiceTest {
     }
 
     @Test
-    void deleteCustomerById_shouldDeleteAndReturnCustomer_whenCustomerExists() {
+    void deleteCustomerById_shouldDeleteCustomer_whenCustomerExists() {
         when(customerRepository.findById(1)).thenReturn(Optional.of(customer));
 
-        Customer result = customerService.deleteCustomerById(1);
-
-        assertThat(result).isSameAs(customer);
+        customerService.deleteCustomerById(1);
 
         verify(customerRepository).findById(1);
         verify(customerRepository).delete(customer);
@@ -146,7 +144,7 @@ class CustomerServiceTest {
                 () -> customerService.deleteCustomerById(99)
         );
 
-        assertThat(exception.getMessage()).isEqualTo("Product not found");
+        assertThat(exception.getMessage()).isEqualTo("Customer not found");
 
         verify(customerRepository).findById(99);
         verify(customerRepository, never()).delete(any(Customer.class));

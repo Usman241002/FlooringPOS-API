@@ -24,10 +24,10 @@ public class CategoryService {
 
     public void deleteCategory(Integer id) {
         Optional<Category> categoryToDeleteOptional = categoryRepository.findById(id);
-        if (categoryToDeleteOptional.isPresent()) {
-            Category categoryToDelete = categoryToDeleteOptional.get();
-            categoryRepository.delete(categoryToDelete);
+        if (categoryToDeleteOptional.isEmpty()) {
+            throw new IllegalArgumentException("Category not found");
         }
-        throw new IllegalArgumentException("Category not found");
+        Category categoryToDelete = categoryToDeleteOptional.get();
+        categoryRepository.delete(categoryToDelete);
     }
 }

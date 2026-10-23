@@ -258,13 +258,11 @@ class ProductServiceTest {
     }
     
     @Test
-    void deleteProduct_shouldDeleteAndReturnProduct_whenProductExists() {
+    void deleteProduct_shouldDeleteProduct_whenProductExists() {
         when(productRepository.findById(1))
                 .thenReturn(Optional.of(product));
 
-        Product result = productService.deleteProduct(1);
-
-        assertThat(result).isSameAs(product);
+        productService.deleteProduct(1);
 
         verify(productRepository).delete(product);
     }

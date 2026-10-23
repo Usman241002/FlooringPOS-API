@@ -133,12 +133,10 @@ class AddressServiceTest {
     }
 
     @Test
-    void deleteAddress_shouldDeleteAndReturnAddress_whenAddressExists() {
+    void deleteAddress_shouldDeleteAddress_whenAddressExists() {
         when(addressRepository.findById(1)).thenReturn(Optional.of(address));
 
-        Address result = addressService.deleteAddress(1);
-
-        assertThat(result).isSameAs(address);
+        addressService.deleteAddress(1);
 
         verify(addressRepository).findById(1);
         verify(addressRepository).deleteById(1);

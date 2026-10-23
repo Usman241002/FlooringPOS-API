@@ -109,16 +109,9 @@ class AddressControllerTest {
     // DELETE /addresses/{id}
 
     @Test
-    void deleteAddress_shouldReturnDeletedAddress() throws Exception {
-        when(addressService.deleteAddress(1))
-                .thenReturn(address);
-
+    void deleteAddress_shouldDeleteAddress() throws Exception {
         mockMvc.perform(delete("/addresses/1"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.addressLine1").value("14 High Street"))
-                .andExpect(jsonPath("$.postcode").value("B25 8AB"));
+                .andExpect(status().isOk());
 
         verify(addressService).deleteAddress(1);
     }
