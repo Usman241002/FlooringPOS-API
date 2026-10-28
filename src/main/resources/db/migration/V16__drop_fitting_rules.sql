@@ -1,0 +1,1 @@
+DROP TABLE fitting_rules CASCADE;
