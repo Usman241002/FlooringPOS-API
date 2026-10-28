@@ -2,8 +2,6 @@ package ukhalid.dev.flooringpos_api.entities;
 
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
-
 @Entity
 @Table(name = "products")
 public class Product {
@@ -17,16 +15,11 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "brand_id", nullable = false)
     private Brand brand;
-    @ManyToOne
-    @JoinColumn(name = "fitting_rule_id")
-    private FittingRule fittingRule;
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
-    private BigDecimal sellingPriceM2;
-    @Column
-    private BigDecimal costPriceM2;
-    @Column
+    @Column(name = "is_herringbone", nullable = false)
+    private Boolean isHerringbone;
+    @Column(name = "is_active", nullable = false)
     private Boolean isActive;
 
     public Product() {
@@ -63,29 +56,21 @@ public class Product {
     public void setName(String name) {
         this.name = name;
     }
-
-    public BigDecimal getSellingPriceM2() {
-        return sellingPriceM2;
-    }
-
-    public void setSellingPriceM2(BigDecimal sellingPriceM2) {
-        this.sellingPriceM2 = sellingPriceM2;
-    }
-
-    public BigDecimal getCostPriceM2() {
-        return costPriceM2;
-    }
-
-    public void setCostPriceM2(BigDecimal costPriceM2) {
-        this.costPriceM2 = costPriceM2;
-    }
-
+    
     public Boolean getIsActive() {
         return isActive;
     }
 
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
+    }
+
+    public Boolean getIsHerringbone() {
+        return isHerringbone;
+    }
+
+    public void setIsHerringbone(Boolean isHerringbone) {
+        this.isHerringbone = isHerringbone;
     }
 }
 

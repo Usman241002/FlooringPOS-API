@@ -15,10 +15,10 @@ public class Address {
     @JoinColumn(name = "customer_id", nullable = false)
     @JsonIgnore
     private Customer customer;
-    @Column(name = "address_line_1", nullable = false)
-    private String addressLine1;
-    @Column(name = "address_line_2")
-    private String addressLine2;
+    @Column(name = "line_1", nullable = false)
+    private String line1;
+    @Column(name = "line_2")
+    private String line2;
     @Column(nullable = false)
     private String postcode;
     @OneToMany(mappedBy = "address")
@@ -32,20 +32,20 @@ public class Address {
         this.id = id;
     }
 
-    public String getAddressLine1() {
-        return addressLine1;
+    public String getLine1() {
+        return line1;
     }
 
-    public void setAddressLine1(String addressLine1) {
-        this.addressLine1 = addressLine1;
+    public void setLine1(String line1) {
+        this.line1 = line1;
     }
 
-    public String getAddressLine2() {
-        return addressLine2;
+    public String getLine2() {
+        return line2;
     }
 
-    public void setAddressLine2(String addressLine2) {
-        this.addressLine2 = addressLine2;
+    public void setLine2(String line2) {
+        this.line2 = line2;
     }
 
     public String getPostcode() {

@@ -31,8 +31,8 @@ public class AddressService {
         Address newAddress = new Address();
         Optional<Customer> customerOptional = customerRepository.findById(address.getCustomerId());
         if (customerOptional.isPresent()) {
-            newAddress.setAddressLine1(address.getAddressLine1());
-            newAddress.setAddressLine2(address.getAddressLine2());
+            newAddress.setLine1(address.getLine1());
+            newAddress.setLine2(address.getLine2());
             newAddress.setPostcode(address.getPostcode());
             newAddress.setCustomer(customerOptional.get());
             return addressRepository.save(newAddress);
@@ -46,8 +46,8 @@ public class AddressService {
         if (addressOptional.isPresent()) {
             Address existingAddress = addressOptional.get();
 
-            existingAddress.setAddressLine1(address.getAddressLine1());
-            existingAddress.setAddressLine2(address.getAddressLine2());
+            existingAddress.setLine1(address.getLine1());
+            existingAddress.setLine2(address.getLine2());
             existingAddress.setPostcode(address.getPostcode());
 
             return addressRepository.save(existingAddress);

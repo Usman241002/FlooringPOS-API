@@ -30,32 +30,32 @@ public class Room {
     @Digits(integer = 7, fraction = 3)
     @DecimalMin(value = "0.001")
     @Column(name = "length_m", precision = 10, scale = 3)
-    private BigDecimal length;
+    private BigDecimal lengthM;
 
     @Digits(integer = 7, fraction = 3)
     @DecimalMin(value = "0.001")
     @Column(name = "width_m", precision = 10, scale = 3)
-    private BigDecimal width;
+    private BigDecimal widthM;
 
     public Room() {
     }
 
     public Room(Address address, String name,
-                BigDecimal length, BigDecimal width) {
+                BigDecimal lengthM, BigDecimal widthM) {
         this.address = address;
         this.name = name;
-        this.length = length;
-        this.width = width;
+        this.lengthM = lengthM;
+        this.widthM = widthM;
     }
 
     @Transient
     @JsonProperty("areaM2")
     public BigDecimal getAreaM2() {
-        if (length == null || width == null) {
+        if (lengthM == null || widthM == null) {
             return null;
         }
 
-        return length.multiply(width)
+        return lengthM.multiply(widthM)
                 .setScale(2, RoundingMode.HALF_UP);
     }
 
@@ -79,19 +79,19 @@ public class Room {
         this.name = name;
     }
 
-    public BigDecimal getLength() {
-        return length;
+    public BigDecimal getLengthM() {
+        return lengthM;
     }
 
-    public void setLength(BigDecimal length) {
-        this.length = length;
+    public void setLengthM(BigDecimal lengthM) {
+        this.lengthM = lengthM;
     }
 
-    public BigDecimal getWidth() {
-        return width;
+    public BigDecimal getWidthM() {
+        return widthM;
     }
 
-    public void setWidth(BigDecimal width) {
-        this.width = width;
+    public void setWidthM(BigDecimal widthM) {
+        this.widthM = widthM;
     }
 }

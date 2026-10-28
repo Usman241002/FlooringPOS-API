@@ -52,8 +52,6 @@ public class ProductService {
         productToSave.setBrand(brandOptional.get());
         productToSave.setCategory(categoryOptional.get());
         productToSave.setName(product.getName());
-        productToSave.setSellingPriceM2(product.getSellingPriceM2());
-        productToSave.setCostPriceM2(product.getCostPriceM2());
         productToSave.setIsActive(product.getIsActive());
 
         return productRepository.save(productToSave);
@@ -87,8 +85,6 @@ public class ProductService {
         productToUpdate.setBrand(brand);
         productToUpdate.setCategory(category);
         productToUpdate.setName(product.getName());
-        productToUpdate.setSellingPriceM2(product.getSellingPriceM2());
-        productToUpdate.setCostPriceM2(product.getCostPriceM2());
         productToUpdate.setIsActive(product.getIsActive());
 
         return productRepository.save(productToUpdate);

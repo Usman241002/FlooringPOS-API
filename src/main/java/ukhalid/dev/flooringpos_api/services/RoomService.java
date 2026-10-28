@@ -47,8 +47,8 @@ public class RoomService {
 
         Room roomToUpdate = roomToUpdateOptional.get();
         roomToUpdate.setName(room.getName());
-        roomToUpdate.setLength(room.getLength());
-        roomToUpdate.setWidth(room.getWidth());
+        roomToUpdate.setLengthM(room.getLengthM());
+        roomToUpdate.setWidthM(room.getWidthM());
 
         return roomRepository.save(roomToUpdate);
     }
